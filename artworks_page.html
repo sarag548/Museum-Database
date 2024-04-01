@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for row in outString %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ row['ArtistID'] }} : {{row['ArtistFName']}} {{row['ArtistLName']}} ({{row['RefNumberID']}}, {{row['MediumID']}})</a>
+                <small class="text-muted">{{ row['EraStartDate'] }} - {{ row['EraEndDate'] }}</small>
+              </div>
+  			<h2><a class="article-title" href="#">{{ row['ArtTitle'] }}</a></h2>
+              <small class="text-muted">{{row['Medium']}}</small>
+          </div>
+        </article>
+     {% endfor %}
+     {% if title %}
+     {% if num %}
+     <div>
+       <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('update_artwork', refNum=num, ArtTitle=title)}}">Update</a> <!-- reroute to update page -->
+       <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+     </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="deleteModalLabel">Delete Artwork?</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <form action="{{url_for('delete_artwork', ArtTitle=title, refNum=num)}}" method="POST">
+               <input class="btn btn-danger" type="submit" value="Delete">
+             </form>
+           </div>
+         </div>
+       </div>
+     </div>
+     {% endif %}
+     {% endif %}
+
+{% endblock content %}

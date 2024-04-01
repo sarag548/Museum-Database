@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Categories</h1>
+    {% for row in outString %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ row }} </a>
+              <small class="text-muted">{{ row }} </small>
+            </div>
+			<h2><a class="article-title" href="{{ url_for(row) }}">{{ row }}</a></h2>
+
+          </div>
+        </article>
+     {% endfor %}
+{% endblock content %}

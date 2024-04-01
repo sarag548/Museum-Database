@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for row in outString %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mcr-2" href="#">{{ row.ArtistID }}</a>
+              <small class="text-muted"></small>
+            </div>
+			<h2><a class="article-title" href="{{ url_for('artist_search', firstName=row.ArtistFName, lastName=row.ArtistLName) }}">{{row['ArtistFName']}} {{row['ArtistLName']}}</a></h2>
+
+          </div>
+        </article>
+     {% endfor %}
+{% endblock content %}

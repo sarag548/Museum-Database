@@ -1,0 +1,33 @@
+INSERT INTO Medium_T (Medium)
+SELECT DISTINCT Medium
+FROM table_7;
+
+INSERT INTO Medium_T (Medium)
+SELECT DISTINCT classification
+FROM table_7;
+
+INSERT INTO Artist_T (ArtistFName, ArtistLName)
+SELECT DISTINCT ArtistFName, ArtistLName
+FROM table_7;
+
+INSERT INTO Era_T (EraStartDate, EraEndDate)
+SELECT DISTINCT EstStartDate, EstEndDate
+FROM table_7
+
+INSERT INTO ArtWork_T (RefNumberID, ArtTitle, EstStartDate, EstEndDate, ArtistID, EraID)
+SELECT t.RefNumberID, t.ArtTitle, t.EstStartDate, t.EstEndDate, a.ArtistID, e.EraID
+FROM table_7 t
+INNER JOIN Era_T e ON e.EraStartDate = t.EstStartDate AND e.EraEndDate = t.EstEndDate
+INNER JOIN Artist_T a ON a.ArtistFName = t.ArtistFName AND a.ArtistLName = t.ArtistLName;
+
+INSERT INTO ArtMediums_T (RefNumberID, MediumID)
+SELECT a.RefNumberID,m.MediumID
+FROM Medium_T m 
+INNER JOIN table_7 t ON m.medium = t.medium
+INNER JOIN ArtWork_T a ON t.RefNumberID = a.RefNumberID;
+
+INSERT INTO ArtMediums_T (RefNumberID, MediumID)
+SELECT a.RefNumberID,m.MediumID
+FROM Medium_T m 
+INNER JOIN table_7 t ON m.medium = t.classification
+INNER JOIN ArtWork_T a ON t.RefNumberID = a.RefNumberID;

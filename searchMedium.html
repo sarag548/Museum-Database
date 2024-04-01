@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for row in outString%}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ row['ArtistID'] }} : {{row['ArtistFName']}} {{row['ArtistLName']}} ({{row['RefNumberID']}}, {{row['MediumID']}})</a>
+              <small class="text-muted">{{ row['EraStartDate'] }} - {{ row['EraEndDate'] }}</small>
+            </div>
+			<h2><a class="article-title" href="#">{{ row['ArtTitle'] }}</a></h2>
+            <small class="text-muted">{{row['Medium']}}</small>
+          </div>
+        </article>
+     {% endfor %}
+{% endblock content %}

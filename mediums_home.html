@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for row in outString %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ row.MediumID }}</a>
+              <small class="text-muted">Desc.</small>
+            </div>
+			<h2><a class="article-title" href="{{ url_for('mediums_search', desc=row.Medium) }}">{{ row.Medium }}</a></h2>
+
+          </div>
+        </article>
+     {% endfor %}
+{% endblock content %}
